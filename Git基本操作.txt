@@ -1,0 +1,11 @@
+1. 把所编写的内容保存到暂存区：gitgit add 文件名
+							   git add 文件名 文件名 …
+							   git add .
+   
+2. 把所编写的内容保存到local：	git commit -m "日志内容"
+
+3. 把local的内容上传到remote：	git push
+
+4. 把remote的内容拉取到local：  gitgit pull
+							   
+5. 查看日志文件：  git log
