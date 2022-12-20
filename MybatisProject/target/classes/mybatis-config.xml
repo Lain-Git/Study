@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    
+    <typeAliases>
+        <package name="cn.lain.pojo"/>
+    </typeAliases>
+
+    <!--可配置多个environment，以连接不同的数据库-->
+    <!--environment：配置数据库连接环境信息，可以配置多个environment，通过default属性切换不同的environment-->
+    <environments default="development">
+        <environment id="development">
+            <!--事务管理方式，学习到Spring的时候可以被接管，无需了解过多-->
+            <transactionManager type="JDBC"/>
+            <!--数据库连接池，MyBatis默认数据库连接池是 POOLED，以后也会被Spring框架的东西接管-->
+            <dataSource type="POOLED">
+                <!--数据库连接信息-->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis_sql?useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="pjl20031006"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--加载sql映射文件-->
+        <!--<mapper resource="cn/lain/mapper/UserMapper.xml"/>-->
+        
+        <!--Mapper代理方式-->
+        <!--这种代理方式比原本加载sql映射文件的方法更有效-->
+        <package name="cn.lain.mapper"/>
+    </mappers>
+</configuration>

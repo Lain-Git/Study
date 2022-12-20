@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace：名称空间
+-->
+<mapper namespace="cn.lain.mapper.BrandMapper">
+    <!--数据库表的字段名称 和 实体类的属性名称不一样，则不能自动封装数据-->
+    <!--
+        ① 起别名：对不一样的列名取别名，别名要和实体类的属性名一样
+            *缺点：每次查询都要定义一次别名
+            *解决方法：使用sql片段  ——  缺点：不灵活
+               **解决方法**
+                resultMap：
+                1. 定义<resultMap>标签
+                2. 在<select>标签中，使用resultMap属性替换resultType属性
+    -->
+
+    <!--sql片段
+    <sql id="brand_column">
+        id ,brand_name as brandName,company_name as companyName,description ,ordered ,status
+    </sql>-->
+
+
+    <!--id：完成主键字段的映射
+        result：完成一般字段的映射
+        （column：表的列名    property：实体类的属性名）-->
+    <resultMap id="brandResultMap" type="brand">
+        <result column="brand_name" property="brandName"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+
+
+    <select id="selectAll" resultMap="brandResultMap">
+        select * from tb_brand;
+    </select>
+</mapper>
