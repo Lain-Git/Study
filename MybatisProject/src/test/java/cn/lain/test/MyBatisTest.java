@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class MaBatisTest {
+public class MyBatisTest {
     @Test
     public void teatSelectAll() throws IOException {
         //1. 获取sqlSessionFactory
