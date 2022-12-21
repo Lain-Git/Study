@@ -35,4 +35,40 @@
     <select id="selectAll" resultMap="brandResultMap">
         select * from tb_brand;
     </select>
+
+    <!--
+        * 参数占位符
+          1. #{}：会将其替换为 ?  为了防止sql注入  [ 传参一定要用#{} ]
+          2. ${}：拼sql  会存在sql注入问题  [ 表名或者列名不固定时，但会有sql注入的风险 ]
+
+          * 参数类型parameterType：可以省略
+          * 特殊字符处理：
+                1. 转义字符：特殊字符少的时候
+                2. CDATA区：特殊字符多的时候，方便
+    -->
+    <!--查看详情-->
+    <select id="selectByIdBrand" resultMap="brandResultMap">
+        <!--大括号中的id最好与Mapper文件中的参数类型一致-->
+        select * from tb_brand where id = ${id};
+    </select>
+
+
+    <!-- 1. 转义字符 -->
+    <!--<select id="selectByIdBrand" resultMap="brandResultMap">
+        &lt;!&ndash;大括号中的id最好与Mapper文件中的参数类型一致&ndash;&gt;
+        &lt;!&ndash; 用转义字符 &lt 代替 < (因为xml文档的语法原因，<不可用来比较)&ndash;&gt;
+        select * from tb_brand where id &lt; ${id};
+    </select>-->
+
+    <!-- 2. CDATA区 -->
+    <!--<select id="selectByIdBrand" resultMap="brandResultMap">
+        &lt;!&ndash;大括号中的id最好与Mapper文件中的参数类型一致&ndash;&gt;
+        &lt;!&ndash;CDATA区中的内容会当作纯文本处理&ndash;&gt;
+        select * from tb_brand where id
+            <![CDATA[
+                <
+            ]]>
+        ${id};
+    </select>-->
+
 </mapper>
