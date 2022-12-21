@@ -47,21 +47,21 @@
                 2. CDATA区：特殊字符多的时候，方便
     -->
     <!--查看详情-->
-    <select id="selectByIdBrand" resultMap="brandResultMap">
+    <select id="selectById" resultMap="brandResultMap">
         <!--大括号中的id最好与Mapper文件中的参数类型一致-->
-        select * from tb_brand where id = ${id};
+        select * from tb_brand where id = #{id};
     </select>
 
 
-    <!-- 1. 转义字符 -->
-    <!--<select id="selectByIdBrand" resultMap="brandResultMap">
-        &lt;!&ndash;大括号中的id最好与Mapper文件中的参数类型一致&ndash;&gt;
-        &lt;!&ndash; 用转义字符 &lt 代替 < (因为xml文档的语法原因，<不可用来比较)&ndash;&gt;
-        select * from tb_brand where id &lt; ${id};
-    </select>-->
+    <!--1. 转义字符
+   <select id="selectByIdBrand" resultMap="brandResultMap">
+       &lt;!&ndash;大括号中的id最好与Mapper文件中的参数类型一致&ndash;&gt;
+       &lt;!&ndash; 用转义字符 &lt 代替 < (因为xml文档的语法原因，<不可用来比较)&ndash;&gt;
+       select * from tb_brand where id &lt; ${id};
+   </select>-->
 
-    <!-- 2. CDATA区 -->
-    <!--<select id="selectByIdBrand" resultMap="brandResultMap">
+    <!-- 2. CDATA区
+    <select id="selectByIdBrand" resultMap="brandResultMap">
         &lt;!&ndash;大括号中的id最好与Mapper文件中的参数类型一致&ndash;&gt;
         &lt;!&ndash;CDATA区中的内容会当作纯文本处理&ndash;&gt;
         select * from tb_brand where id
@@ -70,5 +70,14 @@
             ]]>
         ${id};
     </select>-->
+
+    <!--条件查询-->
+    <select id="selectByCondition" resultMap="brandResultMap">
+        select * from tb_brand
+        where status = #{status}
+        <!--like：模糊查询，因为用户不可能都清楚某些名词的全称-->
+        and company_name like #{companyName}
+        and brand_name like #{brandName}
+    </select>
 
 </mapper>
