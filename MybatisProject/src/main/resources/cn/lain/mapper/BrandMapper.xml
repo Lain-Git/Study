@@ -150,23 +150,42 @@
 
     <update id="update">
         update tb_brand
-        set
-        <if test="brandName != null and brandName != ''">
-            brand_name = #{brandName},
-        </if>
-        <if test="companyName != null and companyName != ''">
-            company_name = #{companyName},
-        </if>
-        <if test="description != null and description != ''">
-            description = #{description},
-        </if>
-        <if test="ordered != null">
-            ordered = #{ordered},
-        </if>
-        <if test="status != null">
-            status = #{status}
-        </if>
-        where id = #{id};
+        <set>
+            <if test="brandName != null and brandName != ''">
+                brand_name = #{brandName},
+            </if>
+            <if test="companyName != null and companyName != ''">
+                company_name = #{companyName},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="ordered != null">
+                ordered = #{ordered},
+            </if>
+            <if test="status != null">
+                status = #{status}
+            </if>
+            where id = #{id};
+        </set>
     </update>
+
+    <delete id="deleteById">
+        delete from tb_brand where id = #{id};
+    </delete>
+
+    <!--
+        MyBatis会将数组参数封装为一个Map集合
+        默认情况下，key的名称是array，value是对应的数组
+        可以在接口文件中使用注解@param来改变Map集合的默认key的名称
+    -->
+    <delete id="deleteByIds">
+        delete from tb_brand where id
+        in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+        ;
+    </delete>
 
 </mapper>

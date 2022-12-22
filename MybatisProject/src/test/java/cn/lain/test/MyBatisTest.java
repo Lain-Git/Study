@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class MyBatisTest {
     @Test
-    public void teatSelectAll() throws IOException {
+    public void testSelectAll() throws IOException {
         //1. 获取sqlSessionFactory
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
@@ -37,7 +37,7 @@ public class MyBatisTest {
     }
 
     @Test
-    public void teatSelectById() throws IOException {
+    public void testSelectById() throws IOException {
         //接受参数
         int id = 1;
 
@@ -61,7 +61,7 @@ public class MyBatisTest {
     }
 
     @Test
-    public void teatSelectByCondition() throws IOException {
+    public void testSelectByCondition() throws IOException {
         //接受参数
         int status = 1;
         String companyName = "华为";
@@ -105,7 +105,7 @@ public class MyBatisTest {
     }
 
     @Test
-    public void teatSelectByConditionSingle() throws IOException {
+    public void testSelectByConditionSingle() throws IOException {
         //接受参数
         int status = 1;
         String companyName = "华为";
@@ -151,7 +151,7 @@ public class MyBatisTest {
     }
 
     @Test
-    public void teatAdd() throws IOException {
+    public void testAdd() throws IOException {
         //接受参数
         int status = 1;
         String companyName = "波导手机";
@@ -197,9 +197,9 @@ public class MyBatisTest {
     }
 
     @Test
-    public void teatUpdate() throws IOException {
+    public void testUpdate() throws IOException {
         //接受参数
-        int status = 1;
+        int status = 0;
         String companyName = "Steam";
         String brandName = "CSGO";
         String description = "一枪一个小朋友";
@@ -209,10 +209,10 @@ public class MyBatisTest {
         //封装对象
         Brand brand = new Brand();
         brand.setStatus(status);
-        brand.setCompanyName(companyName);
-        brand.setBrandName(brandName);
-        brand.setDescription(description);
-        brand.setOrdered(ordered);
+        //brand.setCompanyName(companyName);
+        //brand.setBrandName(brandName);
+        //brand.setDescription(description);
+        //brand.setOrdered(ordered);
         brand.setId(id);
 
         //Map map = new HashMap();
@@ -235,6 +235,65 @@ public class MyBatisTest {
         //4. 执行方法
         int count = brandMapper.update(brand);
         System.out.println(count);
+
+        //5. 提交事务
+        sqlSession.commit();
+
+        //6. 释放资源
+        sqlSession.close();
+    }
+
+    @Test
+    public void testDeleteById() throws IOException {
+        //接受参数
+        int id = 12;
+
+        //Map map = new HashMap();
+        //map.put("status", status);
+        //map.put("companyName", companyName);
+        //map.put("brandName", brandName);
+
+        //1. 获取sqlSessionFactory
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //2. 获取sqlSession对象
+        /*默认开启事务，需手动提交sqlSession.commit()，设置为true，表示自动提交事务*/
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        //3. 获取Mapper接口的代理对象
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        //4. 执行方法
+        brandMapper.deleteById(id);
+
+        //5. 提交事务
+        sqlSession.commit();
+
+        //6. 释放资源
+        sqlSession.close();
+    }
+
+    @Test
+    public void testDeleteByIds() throws IOException {
+        //接受参数
+        int[] ids = {13, 14, 15};
+
+        //1. 获取sqlSessionFactory
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //2. 获取sqlSession对象
+        /*默认开启事务，需手动提交sqlSession.commit()，设置为true，表示自动提交事务*/
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        //3. 获取Mapper接口的代理对象
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        //4. 执行方法
+        brandMapper.deleteByIds(ids);
 
         //5. 提交事务
         sqlSession.commit();
