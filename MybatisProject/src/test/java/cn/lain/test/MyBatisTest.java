@@ -95,9 +95,9 @@ public class MyBatisTest {
         BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
 
         //4. 执行方法
-        //List<Brand> brands = brandMapper.selectByCondition(status, companyName, brandName);
+        List<Brand> brands = brandMapper.selectByCondition(status, companyName, brandName);
         //List<Brand> brands = brandMapper.selectByCondition(brand);
-        List<Brand> brands = brandMapper.selectByCondition(map);
+        //List<Brand> brands = brandMapper.selectByCondition(map);
         System.out.println(brands);
 
         //5. 释放资源
@@ -167,11 +167,6 @@ public class MyBatisTest {
         brand.setDescription(description);
         brand.setOrdered(ordered);
 
-        //Map map = new HashMap();
-        //map.put("status", status);
-        //map.put("companyName", companyName);
-        //map.put("brandName", brandName);
-
         //1. 获取sqlSessionFactory
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
@@ -215,11 +210,6 @@ public class MyBatisTest {
         //brand.setOrdered(ordered);
         brand.setId(id);
 
-        //Map map = new HashMap();
-        //map.put("status", status);
-        //map.put("companyName", companyName);
-        //map.put("brandName", brandName);
-
         //1. 获取sqlSessionFactory
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
@@ -247,11 +237,6 @@ public class MyBatisTest {
     public void testDeleteById() throws IOException {
         //接受参数
         int id = 12;
-
-        //Map map = new HashMap();
-        //map.put("status", status);
-        //map.put("companyName", companyName);
-        //map.put("brandName", brandName);
 
         //1. 获取sqlSessionFactory
         String resource = "mybatis-config.xml";

@@ -30,12 +30,12 @@ public interface BrandMapper {
      * @param brandName
      * @return
      */
-    /*List<Brand> selectByCondition(@Param("status") int status,
+    List<Brand> selectByCondition(@Param("status") int status,
                                   @Param("companyName") String companyName,
-                                  @Param("brandName") String brandName);*/
+                                  @Param("brandName") String brandName);
 
     //List<Brand> selectByCondition(Brand brand);
-    List<Brand> selectByCondition(Map map);
+    //List<Brand> selectByCondition(Map map);
 
     /**
      * 单条件动态查询
