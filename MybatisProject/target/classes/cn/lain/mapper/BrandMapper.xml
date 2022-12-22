@@ -7,15 +7,156 @@
 -->
 <mapper namespace="cn.lain.mapper.BrandMapper">
     <!--数据库表的字段名称 和 实体类的属性名称不一样，则不能自动封装数据-->
-    <!--① 起别名：对不一样的列名取别名，别名要和实体类的属性名一样-->
+    <!--
+        ① 起别名：对不一样的列名取别名，别名要和实体类的属性名一样
+            *缺点：每次查询都要定义一次别名
+            *解决方法：使用sql片段  ——  缺点：不灵活
+               **解决方法**
+                resultMap：
+                1. 定义<resultMap>标签
+                2. 在<select>标签中，使用resultMap属性替换resultType属性
+    -->
 
-    <!--sql片段-->
+    <!--sql片段
     <sql id="brand_column">
         id ,brand_name as brandName,company_name as companyName,description ,ordered ,status
-    </sql>
+    </sql>-->
 
-    <select id="selectAll" resultType="brand">
-        select <include refid="brand_column"/>
-        from tb_brand;
+
+    <!--id：完成主键字段的映射
+        result：完成一般字段的映射
+        （column：表的列名    property：实体类的属性名）-->
+    <resultMap id="brandResultMap" type="brand">
+        <result column="brand_name" property="brandName"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="brandResultMap">
+        select * from tb_brand;
     </select>
+
+    <!--
+        * 参数占位符
+          1. #{}：会将其替换为 ?  为了防止sql注入  [ 传参一定要用#{} ]
+          2. ${}：拼sql  会存在sql注入问题  [ 表名或者列名不固定时，但会有sql注入的风险 ]
+
+          * 参数类型parameterType：可以省略
+          * 特殊字符处理：
+                1. 转义字符：特殊字符少的时候
+                2. CDATA区：特殊字符多的时候，方便
+    -->
+    <!--查看详情-->
+    <select id="selectById" resultMap="brandResultMap">
+        <!--大括号中的id最好与Mapper文件中的参数类型一致-->
+        select * from tb_brand where id = #{id};
+    </select>
+
+
+    <!--1. 转义字符
+   <select id="selectByIdBrand" resultMap="brandResultMap">
+       &lt;!&ndash;大括号中的id最好与Mapper文件中的参数类型一致&ndash;&gt;
+       &lt;!&ndash; 用转义字符 &lt 代替 < (因为xml文档的语法原因，<不可用来比较)&ndash;&gt;
+       select * from tb_brand where id &lt; ${id};
+   </select>-->
+
+    <!-- 2. CDATA区
+    <select id="selectByIdBrand" resultMap="brandResultMap">
+        &lt;!&ndash;大括号中的id最好与Mapper文件中的参数类型一致&ndash;&gt;
+        &lt;!&ndash;CDATA区中的内容会当作纯文本处理&ndash;&gt;
+        select * from tb_brand where id
+            <![CDATA[
+                <
+            ]]>
+        ${id};
+    </select>-->
+
+    <!--条件查询-->
+    <!--like：模糊查询，因为用户不可能都清楚某些名词的全称-->
+    <!--<select id="selectByCondition" resultMap="brandResultMap">
+        select * from tb_brand
+        where status = #{status}
+        and company_name like #{companyName}
+        and brand_name like #{brandName}
+    </select>-->
+
+    <!--
+        动态条件查询
+            * <if>：条件判断
+                * test属性：写逻辑表达式
+            * 问题：
+                * ① 恒等式：where后面加上1 = 1
+                * ② MyBatis中用 <where> 标签替换 where 关键字
+            主选第二种解决方案
+    -->
+    <select id="selectByCondition" resultMap="brandResultMap">
+        select * from tb_brand
+        <!--where 1 = 1-->
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="companyName != null and companyName != ''">
+                and company_name like #{companyName}
+            </if>
+            <if test="brandName != null and brandName != ''">
+                and brand_name like #{brandName}
+            </if>
+        </where>
+    </select>
+
+    <!--
+        单条件动态查询
+    -->
+    <!--<select id="selectByConditionSingle" resultMap="brandResultMap">
+        select * from tb_brand
+        where
+        <choose>&lt;!&ndash;相当于switch&ndash;&gt;
+            <when test="status != null">&lt;!&ndash;相当于case&ndash;&gt;
+                status = #{status}
+            </when>
+            <when test="companyName != null and companyName != ''">
+                company_name like #{companyName}
+            </when>
+            <when test="brandName != null and brandName != ''">
+                brand_name like #{brandName}
+            </when>
+            <otherwise>&lt;!&ndash;相当于default&ndash;&gt;
+                1 = 1
+            </otherwise>
+        </choose>
+    </select>-->
+
+    <select id="selectByConditionSingle" resultMap="brandResultMap">
+        select * from tb_brand
+        <where>
+            <choose><!--相当于switch-->
+                <when test="status != null"><!--相当于case-->
+                    status = #{status}
+                </when>
+                <when test="companyName != null and companyName != ''">
+                    company_name like #{companyName}
+                </when>
+                <when test="brandName != null and brandName != ''">
+                    brand_name like #{brandName}
+                </when>
+            </choose>
+        </where>
+    </select>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_brand (brand_name , company_name , description , ordered , status)
+        values (#{brandName}, #{companyName}, #{description}, #{ordered}, #{status});
+    </insert>
+
+    <update id="update">
+        update tb_brand
+        set
+        brand_name = #{brandName},
+        company_name = #{companyName},
+        description = #{description},
+        ordered = #{ordered},
+        status = #{status}
+        where id = #{id};
+    </update>
+
 </mapper>

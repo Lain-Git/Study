@@ -31,7 +31,6 @@
         <result column="company_name" property="companyName"/>
     </resultMap>
 
-
     <select id="selectAll" resultMap="brandResultMap">
         select * from tb_brand;
     </select>
@@ -72,12 +71,102 @@
     </select>-->
 
     <!--条件查询-->
-    <select id="selectByCondition" resultMap="brandResultMap">
+    <!--like：模糊查询，因为用户不可能都清楚某些名词的全称-->
+    <!--<select id="selectByCondition" resultMap="brandResultMap">
         select * from tb_brand
         where status = #{status}
-        <!--like：模糊查询，因为用户不可能都清楚某些名词的全称-->
         and company_name like #{companyName}
         and brand_name like #{brandName}
+    </select>-->
+
+    <!--
+        动态条件查询
+            * <if>：条件判断
+                * test属性：写逻辑表达式
+            * 问题：
+                * ① 恒等式：where后面加上1 = 1
+                * ② MyBatis中用 <where> 标签替换 where 关键字
+            主选第二种解决方案
+    -->
+    <select id="selectByCondition" resultMap="brandResultMap">
+        select * from tb_brand
+        <!--where 1 = 1-->
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="companyName != null and companyName != ''">
+                and company_name like #{companyName}
+            </if>
+            <if test="brandName != null and brandName != ''">
+                and brand_name like #{brandName}
+            </if>
+        </where>
     </select>
+
+    <!--
+        单条件动态查询
+    -->
+    <!--<select id="selectByConditionSingle" resultMap="brandResultMap">
+        select * from tb_brand
+        where
+        <choose>&lt;!&ndash;相当于switch&ndash;&gt;
+            <when test="status != null">&lt;!&ndash;相当于case&ndash;&gt;
+                status = #{status}
+            </when>
+            <when test="companyName != null and companyName != ''">
+                company_name like #{companyName}
+            </when>
+            <when test="brandName != null and brandName != ''">
+                brand_name like #{brandName}
+            </when>
+            <otherwise>&lt;!&ndash;相当于default&ndash;&gt;
+                1 = 1
+            </otherwise>
+        </choose>
+    </select>-->
+
+    <select id="selectByConditionSingle" resultMap="brandResultMap">
+        select * from tb_brand
+        <where>
+            <choose><!--相当于switch-->
+                <when test="status != null"><!--相当于case-->
+                    status = #{status}
+                </when>
+                <when test="companyName != null and companyName != ''">
+                    company_name like #{companyName}
+                </when>
+                <when test="brandName != null and brandName != ''">
+                    brand_name like #{brandName}
+                </when>
+            </choose>
+        </where>
+    </select>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_brand (brand_name , company_name , description , ordered , status)
+        values (#{brandName}, #{companyName}, #{description}, #{ordered}, #{status});
+    </insert>
+
+    <update id="update">
+        update tb_brand
+        set
+        <if test="brandName != null and brandName != ''">
+            brand_name = #{brandName},
+        </if>
+        <if test="companyName != null and companyName != ''">
+            company_name = #{companyName},
+        </if>
+        <if test="description != null and description != ''">
+            description = #{description},
+        </if>
+        <if test="ordered != null">
+            ordered = #{ordered},
+        </if>
+        <if test="status != null">
+            status = #{status}
+        </if>
+        where id = #{id};
+    </update>
 
 </mapper>

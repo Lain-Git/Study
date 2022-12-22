@@ -21,20 +21,37 @@ public interface BrandMapper {
     /**
      * 条件查询
      * * 参数接收
-     *      1. 散装参数：如果方法中有多个参数，需要使用@param("sql参数占位符名称")
-     *      2. 对象参数：对象的属性名称要和参数占位符一致
-     *      3. map集合参数
+     * 1. 散装参数：如果方法中有多个参数，需要使用@param("sql参数占位符名称")
+     * 2. 对象参数：只需要保证sql中的参数名和实体类属性名对应上
+     * 3. map集合参数：只需要保证sql中的参数名和map集合的键的名称对应上
      *
      * @param status
      * @param companyName
      * @param brandName
      * @return
      */
-    List<Brand> selectByCondition(@Param("status") int status,
+    /*List<Brand> selectByCondition(@Param("status") int status,
                                   @Param("companyName") String companyName,
-                                  @Param("brandName") String brandName);
+                                  @Param("brandName") String brandName);*/
 
-//    List<Brand> selectByCondition(Brand brand);
+    //List<Brand> selectByCondition(Brand brand);
+    List<Brand> selectByCondition(Map map);
 
-//    List<Brand> selectByCondition(Map map);
+    /**
+     * 单条件动态查询
+     * @param brand
+     * @return
+     */
+    List<Brand> selectByConditionSingle(Brand brand);
+
+    /**
+     * 添加
+     */
+    void add(Brand brand);
+
+    /**
+     * 修改
+     */
+    int update(Brand brand);
+
 }
