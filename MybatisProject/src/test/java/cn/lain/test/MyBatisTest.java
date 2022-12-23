@@ -72,11 +72,13 @@ public class MyBatisTest {
         companyName = "%" + companyName + "%";
         brandName = "%" + brandName + "%";
 
-        //封装对象
-        /*Brand brand = new Brand();
-        brand.setStatus(status);
-        brand.setCompanyName(companyName);
-        brand.setBrandName(brandName);*/
+        /*
+        封装对象
+        Brand brand = new Brand();
+         brand.setStatus(status);
+         brand.setCompanyName(companyName);
+         brand.setBrandName(brandName);
+        */
 
         Map map = new HashMap();
         map.put("status", status);
@@ -96,8 +98,8 @@ public class MyBatisTest {
 
         //4. 执行方法
         List<Brand> brands = brandMapper.selectByCondition(status, companyName, brandName);
-        //List<Brand> brands = brandMapper.selectByCondition(brand);
-        //List<Brand> brands = brandMapper.selectByCondition(map);
+        // List<Brand> brands = brandMapper.selectByCondition(brand);
+        // List<Brand> brands = brandMapper.selectByCondition(map);
         System.out.println(brands);
 
         //5. 释放资源
@@ -113,7 +115,7 @@ public class MyBatisTest {
 
         //处理参数
         //数据库 % 和  _ 的作用，需自己手动完成
-        companyName = "%" + companyName + "%";
+        //companyName = "%" + companyName + "%";
         brandName = "%" + brandName + "%";
 
         //封装对象
@@ -198,16 +200,16 @@ public class MyBatisTest {
         String companyName = "Steam";
         String brandName = "CSGO";
         String description = "一枪一个小朋友";
-        int ordered = 56;
+        int ordered = 60;
         int id = 12;
 
         //封装对象
         Brand brand = new Brand();
         brand.setStatus(status);
-        //brand.setCompanyName(companyName);
-        //brand.setBrandName(brandName);
-        //brand.setDescription(description);
-        //brand.setOrdered(ordered);
+        brand.setCompanyName(companyName);
+        brand.setBrandName(brandName);
+        brand.setDescription(description);
+        brand.setOrdered(ordered);
         brand.setId(id);
 
         //1. 获取sqlSessionFactory
