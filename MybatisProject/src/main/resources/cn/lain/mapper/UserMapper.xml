@@ -12,7 +12,33 @@
         select * from tb_user;
     </select>
 
-    <select id="selectById" resultType="user">
+    <!--<select id="selectById" resultType="user">
         select * from tb_user where id = #{id};
+    </select>-->
+
+    <!--@param注解方式-->
+    <select id="select" resultType="user">
+        select * from tb_user
+        where
+        username = #{username}
+        and password = #{password}
     </select>
+
+    <!--键值对的方式
+    <select id="select" resultType="user">
+        select * from tb_user
+        where
+        username = #{arg0}
+        and password = #{arg1}
+    </select>
+
+    <select id="select" resultType="user">
+        select * from tb_user
+        where
+        username = #{param1}
+        and password = #{param2}
+    </select>-->
+
+
+
 </mapper>

@@ -265,7 +265,7 @@ public class MyBatisTest {
     @Test
     public void testDeleteByIds() throws IOException {
         //接受参数
-        int[] ids = {13, 14, 15};
+        int[] ids = {16, 17};
 
         //1. 获取sqlSessionFactory
         String resource = "mybatis-config.xml";

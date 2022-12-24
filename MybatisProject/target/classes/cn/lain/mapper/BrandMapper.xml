@@ -59,7 +59,7 @@
        select * from tb_brand where id &lt; ${id};
    </select>-->
 
-    <!-- 2. CDATA区
+     <!--2. CDATA区
     <select id="selectByIdBrand" resultMap="brandResultMap">
         &lt;!&ndash;大括号中的id最好与Mapper文件中的参数类型一致&ndash;&gt;
         &lt;!&ndash;CDATA区中的内容会当作纯文本处理&ndash;&gt;
@@ -67,7 +67,7 @@
             <![CDATA[
                 <
             ]]>
-        ${id};
+        #{id};
     </select>-->
 
     <!--条件查询-->

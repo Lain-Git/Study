@@ -13,7 +13,9 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="2aca02b6-4a7f-4a64-8106-df1b47dca6b0">
-      <console name="Connection" type="STANDARD" schema="mysql" session="Main"><![CDATA[select * from mybatis_sql.tb_brand]]></console>
+      <console name="Connection" type="STANDARD" schema="mysql" session="Main"><![CDATA[select * from mybatis_sql.tb_brand;
+
+select * from mybatis_sql.tb_user;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
