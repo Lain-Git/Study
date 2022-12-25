@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单项标签</title>
+</head>
+<body>
+
+<form action="#" method="post">
+
+  <input type="hidden" name="id" value="666">
+
+  <!--
+      label标签的作用：点击文本可以选择对应的输入框
+  -->
+  <label for="username">用户名：</label>
+  <input type="text" name="username" id="username"><br>
+  <label for="password">密码：</label>
+  <input type="password" name="password" id="password"><br>
+
+  <!--
+      radio属性：单选
+          要达到互斥效果，需指定name的值相同
+      单选框一定要指定name属性相同，value属性不同
+  -->
+  性别：
+  <input type="radio" name="gender" value="1" id="male"><label for="male">男</label>
+  <input type="radio" name="gender" value="2" id="female"><label for="female">女</label>
+  <br>
+
+  喜欢的角色：
+  <input type="checkbox" name="hobby" value="1" id="lh"> <label for="lh">神里绫华</label>
+  <input type="checkbox" name="hobby" value="2" id="xh"> <label for="xh">珊瑚宫心海</label>
+  <input type="checkbox" name="hobby" value="3" id="ld"> <label for="ld">雷电将军</label>
+  <input type="checkbox" name="hobby" value="4" id="lr"> <label for="lr">神里绫人</label>
+  <br>
+
+  头像：
+  <input type="file">
+  <br>
+
+  <!-- 下拉列表的值要被提交，也需要指定name -->
+  城市：
+  <select name="city">
+    <option value="LiYue">璃月</option>
+    <option value="MengDe">蒙德</option>
+    <option value="DaoQi">稻妻</option>
+    <option value="XvMi">须弥</option>
+  </select>
+  <br>
+
+  个人描述：
+  <textarea cols="20" rows="5" name="desc"></textarea>
+  <br>
+
+  <br>
+  <input type="submit" value="免费注册">
+  <input type="reset" value="重置">
+  <input type="button" value="普通按钮">
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单标签</title>
+</head>
+<body>
+
+<!--
+    表单：在网页中主要负责数据采集功能，使用<form>标签定义表单
+    表单项(元素)：不同类型的input元素、下拉列表、文本域等
+-->
+
+<!--
+    form：定义表单
+        * action：规定当提交表单时向何处发送表单数据(URL)
+                * 表单项数据要想被提交，则必须指定其 name 属性
+        * method：规定用于发送表单数据的方式
+                * get：默认，请求的参数会拼接在 URL 的后边，有大小限制，4KB
+                * post：请求的参数会在 http 请求协议的请求体中，无大小限制
+-->
+
+<form action="#" method="post">
+    <input type="text" name="username">
+    <input type="submit">
+</form>
+
+</body>
+</html>
