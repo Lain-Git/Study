@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格标签</title>
+</head>
+<body>
+<!--
+    border：显示边框
+    cellspacing：把边框合成一条线
+-->
+<table border="1" cellspacing="0" width="500">
+
+  <tr>
+    <th>序号</th>
+    <th>品牌名称</th>
+    <th>企业名称</th>
+  </tr>
+
+  <!--
+      <tr>标签中：align="center"，可以设置文字在单元格位置居中
+  -->
+  <tr align="center">
+    <td>001</td>
+    <td>三只松鼠</td>
+    <td>三只松鼠股份有限公司</td>
+  </tr>
+
+  <tr align="center">
+    <td>002</td>
+    <td>优衣库</td>
+    <td>优衣库股份有限公司</td>
+  </tr>
+
+  <tr align="center">
+    <td>003</td>
+    <td>小米</td>
+    <td>小米科技有限公司</td>
+  </tr>
+
+</table>
+
+<hr>
+
+
+<table border="1" cellspacing="0" width="500">
+
+  <tr>
+    <!-- <th>标签的colspan属性可以设置横跨单元格的列数，数字为几表示跨几列 -->
+    <th colspan="2">序号</th>
+    <th>品牌名称</th>
+  </tr>
+
+  <tr align="center">
+    <td>001</td>
+    <td>三只松鼠</td>
+    <td>三只松鼠股份有限公司</td>
+  </tr>
+
+  <tr align="center">
+    <!-- <th>标签的rowspan属性可以设置横跨单元格的行数，数字为几表示跨几行 -->
+    <td rowspan="2">002</td>
+    <td>优衣库</td>
+    <td>优衣库股份有限公司</td>
+  </tr>
+
+  <tr align="center">
+    <td>003</td>
+    <td>小米</td>
+  </tr>
+
+</table>
+</body>
+</html>
