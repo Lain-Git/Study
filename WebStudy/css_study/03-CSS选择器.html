@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS选择器</title>
+
+  <style>
+    div{
+      color:red;
+    }
+
+    #name{
+      color:blue;
+    }
+
+    .cls{
+      color:pink;
+    }
+  </style>
+
+</head>
+<body>
+<!--
+    生效选择范围最小的一个选择器
+    CSS选择器常见三种：
+        1. 元素选择器：元素名称{color:red;}
+        2. id选择器（唯一）：#id属性值{color:red;}
+        3. 类选择器（不唯一）：.class属性值{color:red;}
+-->
+
+    <div>div_1</div>
+    <div id="name">div_2</div>
+    <div class="cls">div_3</div>
+
+    <span class="cls">span</span>
+
+</body>
+</html>

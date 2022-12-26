@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS导入方式</title>
+    <style>
+        span{
+            color:blue;
+        }
+    </style>
+
+    <link href="./css/demo.css" rel="stylesheet">
+</head>
+<body>
+<!--
+    1. 内联样式：在标签内部使用style属性，属性值是CSS属性键值对
+    2. 内部样式：定义<style>标签，在标签内部定义CSS样式
+    3. 外部样式：定义<link>标签，引入外部的CSS文件
+-->
+
+    <!--1. 内联样式-->
+    <div style="color:red">Lain ~</div><br>
+
+    <!--2. 内部样式-->
+    <!--使用较多-->
+    <span>Lain ~~</span>
+
+    <!--3. 外部样式-->
+    <!--使用较多-->
+    <p><i>Lain ~~~</i></p>
+</body>
+</html>
