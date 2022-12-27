@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript变量</title>
+</head>
+<body>
+<!--
+    JavaScript中使用var关键字来声明变量，作用范围：全局变量
+    JavaScript是一门弱类型语言，可以存放不同类型的值
+
+    * ES6新增let关键字来定义变量，作用范围：let关键字所在的代码块内有效，不可重复声明
+    * ES6新增const关键字来定义常量
+-->
+
+<script>
+    var test = 20;
+    alert(test);
+
+    test = "莲儿";
+    document.write(test);
+
+    {
+        var age = 18;
+        let age_1 = 16;
+        alert(age_1);
+    }
+    alert(age);
+
+</script>
+</body>
+</html>
