@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HistoryAndLocation</title>
+</head>
+<body>
+<!--
+    history.方法();
+    back()：加载history列表前一个URL
+    forward()：加载history列表下一个URL
+
+    location.方法();
+    href属性
+-->
+<script>
+    // alert("要跳转了");
+    // location.href = "http://www.baidu.com"
+
+    document.write("3秒之后跳转到百度首页");
+    setTimeout(function (){
+        location.href = "http://www.baidu.com"
+    },3000);
+</script>
+</body>
+</html>

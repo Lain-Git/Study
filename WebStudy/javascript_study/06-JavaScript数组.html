@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript数组</title>
+</head>
+<body>
+<!--
+    定义数组的方式：
+        ①var arr = new Array(1,2,3);
+        ②var arr = [1,2,3];
+
+    访问数组的方式：
+        arr[索引] = 值;
+
+    特点：
+    JavaScript数组相当于Java中集合：变长变类型
+                        Java数组：定长定类型
+-->
+
+<script>
+    var arr = new Array(1,2,3);
+    //alert(arr);
+
+    var arr_1 = [2,3,4];
+    //alert(arr_1);
+
+    arr_1[0] = 6;
+    arr_1[1] = 5;
+    //alert(arr_1);
+
+    var arr_2 = [1,2,3];
+    arr_2[10] = 9;
+    //alert(arr_2[8]);
+
+    arr_2[4] = "lain";
+    //alert(arr_2);
+
+    var arr_3 = [1,2,3];
+    //for (let i = 0; i < arr_3.length; i++) {
+    //    alert(arr_3[i]);
+    //}
+
+    var arr_4 = [1,2,3];
+    //arr_4.push(10);
+    //alert(arr_4);
+
+    arr_4.splice(0, 1);
+    alert(arr_4);
+</script>
+</body>
+</html>

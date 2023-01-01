@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM对象</title>
+</head>
+<body>
+<!--
+    document：整个文档对象
+    element：元素对象
+    attribute：属性对象
+    text：文本对象
+    comment：注释对象
+
+    获取element对象：
+        * getElementById：根据id属性值获取，返回一个element对象
+        * getElementsByTagName：根据标签名称获取，返回element对象数组
+        * getElementsByName：根据name属性值获取，返回element对象数组
+        * getElementsByClassName：根据class属性值获取，返回element对象数组
+    常见HTML element对象的使用
+-->
+
+<div id="light">666</div> <br>
+
+<div class="cls">lain</div> <br>
+<div class="cls">莲儿</div> <br>
+
+<input type="checkbox" name="hobby">电影
+<input type="checkbox" name="hobby">旅游
+<input type="checkbox" name="hobby">游戏
+
+<script>
+    var num = document.getElementById("light");
+    // alert(num);
+
+    var divs = document.getElementsByTagName("div");
+    // alert(divs.length);
+    // for(let i = 0; i < divs.length; i++){
+    //     alert(divs[i]);
+    // }
+
+    var hobbies = document.getElementsByName("hobby");
+    // for(let i = 0; i < hobbies.length; i++){
+    //     alert(hobbies[i]);
+    // }
+
+    var classes = document.getElementsByClassName("cls");
+    // for(let i = 0; i < classes.length; i++){
+    //     alert(classes[i]);
+    // }
+
+
+</script>
+
+</body>
+</html>
