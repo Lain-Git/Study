@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--1. 导入Spring的坐标：spring-context，5.2.10.RELEASE-->
+
+    <!--
+        2. 配置bean
+           bean标签表示配置bean
+           id属性表示给bean取名字（方便以后取对象）
+           class属性表示给bean定义类型（要配置实现类，造对象使用）
+    -->
+    <bean id="bookDao" class="com.lain.dao.impl.BookDaoImpl"/>
+    <bean id="bookService" class="com.lain.service.impl.BookServiceImpl"/>
+
+</beans>
