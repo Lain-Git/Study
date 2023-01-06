@@ -12,7 +12,19 @@
            id属性表示给bean取名字（方便以后取对象）
            class属性表示给bean定义类型（要配置实现类，造对象使用）
     -->
-    <bean id="bookDao" class="com.lain.dao.impl.BookDaoImpl"/>
-    <bean id="bookService" class="com.lain.service.impl.BookServiceImpl"/>
+
+    <!--
+        scope属性：prototype非单例；singleton单例
+        默认为singleton
+    -->
+
+    <bean id="bookDao" name="BookDao dao" class="com.lain.dao.impl.BookDaoImpl" scope="prototype"/>
+    <bean id="bookService" name="BookService service" class="com.lain.service.impl.BookServiceImpl" scope="prototype">
+        <!--7. 配置Service与Dao的关系-->
+        <!--property标签：配置当前bean的属性-->
+        <!--name属性：配置哪一个具体的属性（属性的名称）-->
+        <!--ref属性：参照哪一个bean（参照的bean的名称）-->
+        <property name="bookDao" ref="dao"/>
+    </bean>
 
 </beans>
